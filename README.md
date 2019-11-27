@@ -32,7 +32,7 @@ This commands will open the environment with the vehicle and it will also open R
 Anaconda creates a virtual environment which takes care of all the dependencies required for this project. `training.yml` file is provided with the package. The only thing that needs to be done is import this yml file to anaconda navigator on your pc using the following steps.
 
 Make sure you have anaconda installed on your PC. If it is not installed search google and install it.
-Open the terminal at the location of `training.yml` file
+Open the terminal at the location of `ninad_training.yml` file
 ``$ conda env create -f ninad_training.yml``
 Now the virtual environment training.yml is set up in the anaconda of your PC
 Whenever required it can be activated using ``$ conda activate ninad_training``
