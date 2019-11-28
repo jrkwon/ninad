@@ -3,6 +3,9 @@
 
 ###############################################################################
 #
+
+import const
+
 class Config:
     def __init__(self): # model_name):
         self.version = (0, 4) # version 0.4
@@ -14,17 +17,20 @@ class Config:
         #self.raw_scale = 1.0 # Multiply raw input by this scale
         #self.jitter_tolerance = 0.009 # joystick jitter
        
-        #type of Model = (1)Jkwon-Shobhit,
-        #                (2)Nvidia, 
-        #                (3)SqueezeNet (Transfer_Learning),
-        #                (4)MirNet_C (LSTM-fc6),
-        #                (5)MirNet_L (LSTM-fc8),
-        #                (6)Transfer_Learning_ResNet
-        self.typeofModel = 1
-        if self.typeofModel == 3 or self.typeofModel == 6: #Transfer_Learning_ResNet, SqueezeNet
+        #net_model_type = (1)Jkwon-Shobhit,
+        #                 (2)Nvidia, 
+        #                 (3)SqueezeNet (Transfer_Learning),
+        #                 (4)MirNet_C (LSTM-fc6),
+        #                 (5)MirNet_L (LSTM-fc8),
+        #                 (6)Transfer_Learning_ResNet
+        self.net_model_type = const.NET_TYPE_NVIDIA
+
+        if self.net_model_type == const.NET_TYPE_SQUEEZE or self.net_model_type == const.NET_TYPE_RESNET: 
+            # Transfer_Learning_ResNet, SqueezeNet
             self.image_size = (400, 200, 3)       
             self.capture_area = (0,370,800,620)
-        else:                                          #Jkwon-Shobhit, Nvidia, MirNet_C, MirNet_L
+        else: 
+            #Jkwon-Shobhit, Nvidia, MirNet_C, MirNet_L
             self.image_size = (160, 70, 3)
             self.capture_area = (0,380,800,800)
         #self.capture_size = (self.capture_area[3]-self.capture_area[1], 

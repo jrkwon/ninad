@@ -7,6 +7,7 @@ import numpy as np
 #import keras
 import sklearn
 
+import const
 from net_model import NetModel
 from drive_data import DriveData
 from config import Config
@@ -120,7 +121,7 @@ class DriveTrain:
                     X_train = np.array(images)
                     y_train = np.array(measurements)
 
-                    if self.config.typeofModel == 4 or self.config.typeofModel == 5:
+                    if self.config.net_model_type == const.NET_TYPE_LSTM_FC6 or self.config.net_model_type == const.NET_TYPE_LSTM_FC7:
                         X_train = np.array(images).reshape(-1, 1, self.config.image_size[1],
                                                                   self.config.image_size[0],
                                                                   self.config.image_size[2])
@@ -147,7 +148,9 @@ class DriveTrain:
         
         # checkpoint
         callbacks = []
-        checkpoint = ModelCheckpoint(self.net_model.name+'.h5', monitor='val_loss', 
+        weight_filename = self.net_model.name+'_n'+str(self.config.net_model_type)+'_ckpt'
+        checkpoint = ModelCheckpoint(weight_filename+'.h5',
+                                     monitor='val_loss', 
                                      verbose=1, save_best_only=True, mode='min')
         callbacks.append(checkpoint)
         

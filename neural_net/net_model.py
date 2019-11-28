@@ -5,7 +5,7 @@ Created on Tue April 11 14:35 2019
 
 @author: ninad
 """
-
+import const
 from keras.models import Sequential, Model
 from keras.layers import Lambda, Dropout, Flatten, Dense, Activation, Concatenate
 from keras.layers import Conv2D, MaxPooling2D, BatchNormalization, Input
@@ -22,12 +22,12 @@ class NetModel:
         self.model_path = model_path
         self.config = Config()
 
-        if self.config.typeofModel == 3:
+        if self.config.net_model_type == 3:
             self.base_model = None
             self.x = None
             self.prediction = None
 
-        if self.config.typeofModel == 6:
+        if self.config.net_model_type == 6:
             self.input = None
             self.Lambda = None
             self.conv1 = None
@@ -73,7 +73,7 @@ class NetModel:
     #
     def _model(self):
         
-        if self.config.typeofModel == 1:
+        if self.config.net_model_type == const.NET_TYPE_MIR:
         
             input_shape = (self.config.image_size[1], self.config.image_size[0],
                            self.config.image_size[2])
@@ -103,7 +103,7 @@ class NetModel:
 
         ###----------------------------------------------------------------###
 
-        elif self.config.typeofModel == 2:
+        elif self.config.net_model_type == const.NET_TYPE_NVIDIA:
 
             input_shape = (self.config.image_size[1], self.config.image_size[0],
                            self.config.image_size[2])
@@ -125,7 +125,7 @@ class NetModel:
 
         ###----------------------------------------------------------------###
 
-        elif self.config.typeofModel == 3:
+        elif self.config.net_model_type == const.NET_TYPE_SQUEEZE:
             
             from keras.applications.resnet50 import ResNet50
         
@@ -165,7 +165,7 @@ class NetModel:
 
         ###----------------------------------------------------------------###
 
-        elif self.config.typeofModel == 4:
+        elif self.config.net_model_type == const.NET_TYPE_LSTM_FC6:
 
             from keras.layers.recurrent import LSTM
             from keras.layers.wrappers import TimeDistributed
@@ -192,7 +192,7 @@ class NetModel:
 
         ###----------------------------------------------------------------###
 
-        elif self.config.typeofModel == 5:
+        elif self.config.net_model_type == const.NET_TYPE_LSTM_FC7:
 
             from keras.layers.recurrent import LSTM
             from keras.layers.wrappers import TimeDistributed
@@ -219,7 +219,7 @@ class NetModel:
 
         ###----------------------------------------------------------------###
 
-        elif self.config.typeofModel == 6:
+        elif self.config.net_model_type == const.NET_TYPE_RESNET:
 
             self.input = Input(shape=(self.config.image_size[1], self.config.image_size[0],
                                       self.config.image_size[2]))
@@ -301,8 +301,9 @@ class NetModel:
     def save(self):
         
         json_string = self.model.to_json()
-        open(self.model_path+'.json', 'w').write(json_string)
-        self.model.save_weights(self.model_path+'.h5', overwrite=True)
+        weight_filename = self.model_path+'_n'+str(self.config.net_model_type)
+        open(weight_filename+'.json', 'w').write(json_string)
+        self.model.save_weights(weight_filename+'.h5', overwrite=True)
     
     
     ###########################################################################

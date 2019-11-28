@@ -49,8 +49,9 @@ class NetModel:
 
     def save(self):
         json_string = self.model.to_json()
-        open(self.model_path+'.json', 'w').write(json_string)
-        self.model.save_weights(self.model_path+'.h5', overwrite=True)
+        weight_filename = self.model_path+'_n'+str(self.net_model_type)
+        open(weight_filename+'.json', 'w').write(json_string)
+        self.model.save_weights(weight_filename+'.h5', overwrite=True)
 
     def load(self):
         from keras.models import model_from_json
