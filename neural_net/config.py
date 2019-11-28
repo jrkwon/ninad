@@ -20,7 +20,7 @@ class Config:
         #                (4)MirNet_C (LSTM-fc6),
         #                (5)MirNet_L (LSTM-fc8),
         #                (6)Transfer_Learning_ResNet
-        self.typeofModel = 4
+        self.typeofModel = 1
         if self.typeofModel == 3 or self.typeofModel == 6: #Transfer_Learning_ResNet, SqueezeNet
             self.image_size = (400, 200, 3)       
             self.capture_area = (0,370,800,620)
