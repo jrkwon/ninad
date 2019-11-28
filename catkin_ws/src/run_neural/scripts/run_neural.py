@@ -14,6 +14,7 @@ import sys
 
 sys.path.append('../neural_net/')
 
+import const
 from image_converter import ImageConverter
 from drive_run import DriveRun
 from config import Config
@@ -45,7 +46,7 @@ class NeuralControl:
                                   self.config.image_size[1]))
         self.image = self.image_process.process(img)
 
-        if self.config.typeofModel == 4 or self.config.typeofModel == 5:
+        if self.config.net_model_type == const.NET_TYPE_LSTM_FC6 or self.config.net_model_type == const.NET_TYPE_LSTM_FC7:
             self.image = np.array(self.image).reshape(1, self.config.image_size[1],
                                                          self.config.image_size[0],
                                                          self.config.image_size[2])
