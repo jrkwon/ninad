@@ -5,12 +5,12 @@ Created on Tue April 11 14:35 2019
 
 @author: ninad
 """
-import const
 from keras.models import Sequential, Model
 from keras.layers import Lambda, Dropout, Flatten, Dense, Activation, Concatenate
 from keras.layers import Conv2D, MaxPooling2D, BatchNormalization, Input
 from keras import losses, optimizers
 
+import const
 from config import Config
 
 class NetModel:
@@ -22,12 +22,12 @@ class NetModel:
         self.model_path = model_path
         self.config = Config()
 
-        if self.config.net_model_type == 3:
+        if self.config.net_model_type == const.NET_TYPE_SQUEEZE:
             self.base_model = None
             self.x = None
             self.prediction = None
 
-        if self.config.net_model_type == 6:
+        if self.config.net_model_type == const.NET_TYPE_RESNET:
             self.input = None
             self.Lambda = None
             self.conv1 = None
