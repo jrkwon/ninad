@@ -89,8 +89,7 @@ $ conda activate neural_net
 Note that `?` is a number indicating a network structure ID defined at `neural_net/config.py`
 
 Then it will load the trained weight `your_data_name/year_month_date_time_n?.h5` and run it to generate the steering angle.
-
-# Salient Features Visualization
+## Salient Features Visualization
 
 Salient features is a very useful tool which shows how much is the responsibility of which part of the image in predicting the current predicted output. Basically, it draws a heat map on the input image which color codes the image in different segments. Red color being the most responsible and blue color being the least responsible. More details on the salient features is provided in my thesis.
 
